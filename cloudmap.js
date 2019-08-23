@@ -7,9 +7,7 @@ const sd = new AWS.ServiceDiscovery({ region });
 
 const findNamespaceByName = async (name) => {
   const { Namespaces } = await sd.listNamespaces({}).promise();
-  const namespace = Namespaces.find((namespace) => {
-    return namespace.Name === name;
-  });
+  const namespace = Namespaces.find((namespace) => namespace.Name === name);
   return namespace;
 };
 
