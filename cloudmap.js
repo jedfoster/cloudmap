@@ -80,6 +80,12 @@ const deleteService = async (serviceName) => {
   };
 
   // Gross :(
+  // deregistering instances takes a few seconds and is performed
+  // asynchronously, which returns a change id. But you can't 
+  // remove a service with registered instances, so we have to wait
+  // for them all to deregister first. 2 seconds is a total guess, 
+  // with way more instances, it could exceed this and cause an error.
+  // This needs some more thought.
   return setTimeout(() => {
     return sd.deleteService(params).promise();
   }, 2000);
